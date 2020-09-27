@@ -13,6 +13,8 @@ function createWindow(): BrowserWindow {
   const electronScreen = screen;
   const size = electronScreen.getPrimaryDisplay().workAreaSize;
 
+  process.env['APP_PATH'] = app.getAppPath();
+
   // Create the browser window.
   win = new BrowserWindow({
     x: size.width/4,
@@ -20,6 +22,7 @@ function createWindow(): BrowserWindow {
     width: size.width/2,
     height: size.height/2,
     transparent: false,
+    show: false,
     icon: path.join(__dirname, 'dist/assets/logo.png'),
     frame: false,
     resizable: true,
@@ -62,6 +65,10 @@ function createWindow(): BrowserWindow {
 
   win.on('unmaximize', () => {
       win.webContents.send('unmaximized')
+  })
+
+  win.once('ready-to-show', () => {
+    win.show();
   })
 
   return win;

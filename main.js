@@ -9,6 +9,7 @@ function createWindow() {
     process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1';
     var electronScreen = electron_1.screen;
     var size = electronScreen.getPrimaryDisplay().workAreaSize;
+    process.env['APP_PATH'] = electron_1.app.getAppPath();
     // Create the browser window.
     win = new electron_1.BrowserWindow({
         x: size.width / 4,
@@ -16,6 +17,7 @@ function createWindow() {
         width: size.width / 2,
         height: size.height / 2,
         transparent: false,
+        show: false,
         icon: path.join(__dirname, 'dist/assets/logo.png'),
         frame: false,
         resizable: true,
@@ -51,6 +53,9 @@ function createWindow() {
     });
     win.on('unmaximize', function () {
         win.webContents.send('unmaximized');
+    });
+    win.once('ready-to-show', function () {
+        win.show();
     });
     return win;
 }
