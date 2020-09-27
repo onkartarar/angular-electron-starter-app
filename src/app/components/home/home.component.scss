@@ -1,0 +1,17 @@
+.center{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+
+  .text-center{
+    color: #333333;
+    font-size: 55px;
+    line-height: 80px;
+    text-transform: uppercase;
+    font-weight: 100;
+  }
+
+}
